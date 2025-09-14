@@ -50,6 +50,8 @@ function handleOperator(nextOperator) {
     let result = firstOperand;
     if (operator === '+') {
       result = firstOperand + inputValue;
+    } else if (operator === '-') {
+      result = firstOperand - inputValue;
     }
     display.value = String(result);
     firstOperand = result;
@@ -66,6 +68,8 @@ function handleEquals() {
   let result = firstOperand;
   if (operator === '+') {
     result = firstOperand + inputValue;
+  } else if (operator === '-') {
+    result = firstOperand - inputValue;
   }
 
   display.value = String(result);
