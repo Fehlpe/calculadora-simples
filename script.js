@@ -1,6 +1,3 @@
-// script.js - Commit 2: função de soma e ligação dos botões
-// Implementa comportamento mínimo para permitir operações de soma
-
 const display = document.getElementById('display');
 const buttons = Array.from(document.querySelectorAll('.btn'));
 const clearBtn = document.getElementById('clear');
@@ -52,6 +49,10 @@ function handleOperator(nextOperator) {
       result = firstOperand + inputValue;
     } else if (operator === '-') {
       result = firstOperand - inputValue;
+    } else if (operator === '*') {
+      result = firstOperand * inputValue;
+    } else if (operator === '/') {
+      result = firstOperand / inputValue;
     }
     display.value = String(result);
     firstOperand = result;
@@ -70,6 +71,10 @@ function handleEquals() {
     result = firstOperand + inputValue;
   } else if (operator === '-') {
     result = firstOperand - inputValue;
+  } else if (operator === '*') {
+    result = firstOperand * inputValue;
+  } else if (operator === '/') {
+    result = firstOperand / inputValue;
   }
 
   display.value = String(result);
