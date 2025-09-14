@@ -126,3 +126,5 @@ buttons.forEach(btn => {
 });
 
 clearBtn.addEventListener('click', clearAll);
+
+console.log("teste");
