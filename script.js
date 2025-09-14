@@ -117,6 +117,7 @@ buttons.forEach(btn => {
   } else if (val === '.') {
     btn.addEventListener('click', inputDecimal);
   } else if (val === 'C' || btn.classList.contains('clear')) {
+    // Clear button handled separately
   } else {
     btn.addEventListener('click', () => {
       inputDigit(val);
@@ -125,7 +126,3 @@ buttons.forEach(btn => {
 });
 
 clearBtn.addEventListener('click', clearAll);
-
-if (typeof module !== 'undefined') {
-  module.exports = { inputDigit, inputDecimal, handleOperator, handleEquals, clearAll, compute };
-}
