@@ -56,3 +56,6 @@ body{
 .op{background:#fde68a}
 .eq{background:var(--accent); color:#fff}
 .clear{grid-column:span 4; background:#fca5a5}
+
+/* Indicador visual para operador ativo */
+.btn.active{outline:3px solid rgba(37,99,235,0.15); box-shadow:0 0 0 3px rgba(37,99,235,0.06) inset}
