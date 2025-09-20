@@ -20,6 +20,24 @@ jobs:
       - name: Run tests
         run: npm test
 
+  # Notifica quando PR é aberto (aviso informativo) — requer secrets para envio de email
+  notify-on-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send email on PR opened
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_HOST }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          subject: "PR opened — ${{ github.event.pull_request.title }}"
+          to: ${{ secrets.ALERT_EMAIL_TO }}
+          from: ${{ secrets.ALERT_EMAIL_FROM }}
+          body: "Uma PR foi aberta: ${{ github.event.pull_request.html_url }}"
+
+  # Notifica quando houver falha no teste (mantido)
   notify-on-failure:
     needs: test
     if: ${{ failure() }}
