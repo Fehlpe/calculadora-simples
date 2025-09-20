@@ -29,3 +29,9 @@ test('divisão por zero gera erro', () => {
   expect(error).toBe('Divisão por zero');
   expect(result).toBeNull();
 });
+
+test('operador inválido retorna erro', () => {
+  const { error, result } = compute(1, '^', 2);
+  expect(error).toBe('Operador inválido');
+  expect(result).toBeNull();
+});
