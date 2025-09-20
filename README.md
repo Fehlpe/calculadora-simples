@@ -40,10 +40,43 @@ docker tag calculadora-simples:latest SEU_USUARIO/calculadora-simples:latest
 
 docker push SEU_USUARIO/calculadora-simples:latest
 
-## Commit e push das mudanças (exemplo PowerShell)
+## Testes unitários
+Instale dependências e execute os testes com Node.js:
 
-cd 'C:\Users\Felipe\Desktop\calculadora\calculadora-simples'; git add Dockerfile README.md; git commit -m "Add Dockerfile and README with Docker instructions"; git push origin main
+```powershell
+# na pasta do projeto
+npm ci
+npm test
+```
 
+Foram adicionados 5 testes unitários em `tests/calc.test.js` cobrindo soma, subtração, multiplicação, divisão e divisão por zero.
+
+## GitHub Actions — CI e alertas
+Adicionado workflow em `.github/workflows/ci.yml` que executa os testes em eventos `pull_request` e `push` na branch `main`.
+
+O workflow também possui um job `notify-on-failure` que envia um e-mail quando a pipeline falha usando `dawidd6/action-send-mail`. Para que o envio funcione, configure os seguintes Secrets no repositório GitHub (Settings → Secrets → Actions):
+
+- `SMTP_HOST` — servidor SMTP (ex: `smtp.gmail.com` ou seu provedor)
+- `SMTP_PORT` — porta (ex: `587`)
+- `SMTP_USER` — usuário SMTP
+- `SMTP_PASS` — senha ou app password
+- `ALERT_EMAIL_TO` — e-mail destino das notificações
+- `ALERT_EMAIL_FROM` — e-mail remetente
+
+Depois de configurar os secrets, abra uma Pull Request para ver o workflow rodar e, em caso de falha, você receberá um e-mail de alerta.
+
+## Screenshots solicitadas
+- Screenshot do arquivo de workflow: abra `.github/workflows/ci.yml` no GitHub ou VSCode e capture a tela.
+- Screenshot de alertas recebidos: após configurar secrets e forçar uma falha nos testes (por exemplo, alterar temporariamente um teste), abra sua caixa de entrada para mostrar o e-mail.
+- Screenshot dos testes no código: capture `tests/calc.test.js`.
+- Screenshot do workflow rodando dentro de uma PR: crie uma PR e capture a aba 'Checks' ou 'Actions' com a execução.
+
+## Commit e push
+```powershell
+git add package.json package-lock.json src tests .github README.md
+git commit -m "Add Jest tests and CI workflow with email alerts"
+git push origin develop/criacao-projeto
+```
 
 ## Observações
 - O `Dockerfile` usa a imagem oficial `nginx:alpine` e copia os arquivos do projeto para `/usr/share/nginx/html`.
